@@ -8,7 +8,7 @@ These patches are extracted from [Devel::PatchPerl](https://metacpan.org/pod/Dev
 Devel::PatchPerl allows us to build/install old perls into recent OS.
 I always use it, and it's very useful. Thanks Bingos for creating and maintaining Devel::PatchPerl.
 
-It is written in perl. Unfortunately, we cannot assume that there already exists *system* perl *before* installing perl recently.
+It is written in perl. Unfortunately, these days, we cannot assume that there already exists *system* perl *before* installing perl.
 In fact, Apple announced that scripting language runtimes including perl wouldn't be available by default in future versions of macOS
 ([see this](https://developer.apple.com/documentation/xcode_release_notes/xcode_11_release_notes)).
 
