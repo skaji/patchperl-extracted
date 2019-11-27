@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DIR="$(dirname $0)"
 
@@ -10,7 +10,7 @@ if [ -z "$PERL_VERSION" ] || [ "$PERL_VERSION" = "-h" ] || [ "$PERL_VERSION" = "
 fi
 
 if [ ! -f patchlevel.h ]; then
-  echo "!!! The current directory is not perl source code" >&2
+  echo "The current directory is not perl source code" >&2
   exit 1
 fi
 
@@ -20,7 +20,7 @@ if [ ! -d "$DIR/patch/$PERL_VERSION" ]; then
 fi
 
 if grep -q patchperl-extracted patchlevel.h; then
-  echo "!!! Already patched by patchperl-extracted" >&2
+  echo "Already patched by patchperl-extracted" >&2
   exit 1
 fi
 
@@ -38,7 +38,9 @@ export PATCH_GET=0
 chmod -R u+w .
 
 for f in "$DIR"/patch/$PERL_VERSION/all/*.patch; do
-  echo "---> $PATCH_CMD -f -s -p0 < ${f##*/}" >&2
+  if [ -z $PATCHPERL_QUIET ]; then
+    echo "---> $PATCH_CMD -f -s -p0 < ${f##*/}" >&2
+  fi
   if ! $PATCH_CMD -f -s -p0 < "$f"; then
     exit 1
   fi
@@ -47,7 +49,9 @@ done
 if [ -d "$DIR"/patch/$PERL_VERSION/conditional ]; then
   for d in "$DIR"/patch/$PERL_VERSION/conditional/*; do
     if sh "$d"/condition; then
-      echo "---> $PATCH_CMD -f -s -p0 < ${d##*/}/patch" >&2
+      if [ -z $PATCHPERL_QUIET ]; then
+        echo "---> $PATCH_CMD -f -s -p0 < ${d##*/}/patch" >&2
+      fi
       if ! $PATCH_CMD -f -s -p0 < "$d"/patch; then
         exit 1
       fi
@@ -56,6 +60,8 @@ if [ -d "$DIR"/patch/$PERL_VERSION/conditional ]; then
 fi
 
 for f in "$DIR"/hints/*; do
-  echo "---> cp -f hints/${f##*/} hints/" >&2
+  if [ -z $PATCHPERL_QUIET ]; then
+    echo "---> cp -f hints/${f##*/} hints/" >&2
+  fi
   cp -f "$f" hints/
 done

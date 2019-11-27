@@ -14,14 +14,13 @@ use HTTP::Tiny;
 use Sub::Util 'subname';
 use version;
 
-our $VERSION = '0.01';
+our $VERSION = '0.0.1';
 
 chdir "$FindBin::Bin/..";
 
 {
     write_binary "version", <<END
-Devel::PatchPerl $Devel::PatchPerl::VERSION
-patchperl-extracted $VERSION
+Devel::PatchPerl $Devel::PatchPerl::VERSION (patchperl-extracted $VERSION)
 END
 }
 
