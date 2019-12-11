@@ -1,7 +1,7 @@
 # patchperl extracted
 
-Collection of patches for old perls.
-These patches are extracted from [Devel::PatchPerl](https://metacpan.org/pod/Devel::PatchPerl).
+Collection of patch files for old perls.
+These patch files are extracted from [Devel::PatchPerl](https://metacpan.org/pod/Devel::PatchPerl).
 
 # Why not Devel::PatchPerl?
 
@@ -12,7 +12,7 @@ It is written in perl. Unfortunately, these days, we cannot assume that there al
 In fact, Apple announced that scripting language runtimes including perl wouldn't be available by default in future versions of macOS
 ([see this](https://developer.apple.com/documentation/xcode_release_notes/xcode_11_release_notes)).
 
-So I think it is useful there exist plain patches for old perls.
+So I think it is useful there exist plain patch files for old perls.
 
 # Install
 
@@ -39,7 +39,7 @@ cd perl-5.8.1
 /path/to/patchperl-extracted/patchperl 5.8.1
 
 # Step 3. Build perl as usual
-./Configure -des -Dprefix=$HOME/perl-5.8.1
+./Configure -des -Dprefix=$HOME/perl-5.8.1 -Dscriptdir=$HOME/perl-5.8.1/bin
 make
 make install
 ```
