@@ -23,9 +23,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Get Perl sorce code tarball
+        run: wget -q https://www.cpan.org/src/5.0/perl-${{ matrix.perl-version }}.tar.gz
       - name: Apply patches
         run: |
-          wget -q https://www.cpan.org/src/5.0/perl-${{ matrix.perl-version }}.tar.gz
           tar xzf perl-${{ matrix.perl-version }}.tar.gz
           cd perl-${{ matrix.perl-version }}
           ../patchperl ${{ matrix.perl-version }}
+      - name: Build Perl
+        run: |
+          cd perl-${{ matrix.perl-version }}
+          ./Configure -des -Dprefix=/tmp/perl-${{ matrix.perl-version }}
+          make install
