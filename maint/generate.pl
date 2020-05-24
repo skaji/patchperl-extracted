@@ -94,7 +94,7 @@ for my $perl_version (@PERL_VERSION) {
             my ($sub, @argv) = @$sub;
             my $name = subname $sub;
             if (!$KNOWN{$name}++) {
-                warn "---> found new patch: $name\n";
+                warn "\e[1;32m---> found new patch: $name\e[m\n";
             }
             $name =~ s/Devel::PatchPerl::_patch_//;
             next if grep { $name eq $_ } @skip;
