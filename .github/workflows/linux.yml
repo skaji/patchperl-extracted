@@ -1,0 +1,31 @@
+name: linux
+
+on:
+  push:
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
+  pull_request:
+
+jobs:
+  perl:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        perl-version:
+          - '5.8.1'
+          - '5.10.1'
+          - '5.16.3'
+          - '5.30.2'
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Apply patches
+        run: |
+          wget -q https://www.cpan.org/src/5.0/perl-${{ matrix.perl-version }}.tar.gz
+          tar xzf perl-${{ matrix.perl-version }}.tar.gz
+          cd perl-${{ matrix.perl-version }}
+          ../patchperl ${{ matrix.perl-version }}
