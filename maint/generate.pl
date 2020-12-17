@@ -81,6 +81,7 @@ my %KNOWN = map { ("Devel::PatchPerl::$_", 1) } qw(
     _patch_time_local_t
     _patch_pp_c_libc
     _patch_conf_gcc10
+    _patch_useshrplib
 );
 
 my @skip = qw(develpatchperlversion sysv patchlevel hints bitrig conf_solaris);
